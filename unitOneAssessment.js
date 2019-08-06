@@ -5,31 +5,92 @@ let assert = require('assert')
 // Write a function called isOdd that returns whether or not a number is odd.
 // If something that is not a number is passed in, return false.
 
+const isOdd = (num) => {
+  if (isNaN(num) === true){
+    return false
+  }else if (num === null){
+    return false
+  }else if (num % 2 === 0){
+    return false
+  }else{
+    return true
+  }
+}
 
 // Uncomment out the next line to test your solution
-// runQ1Tests()
+runQ1Tests()
 
 
 // Question Two:
 
 // Write a function called numberOfDigits that returns how many digits are in a given number
+const numberOfDigits = (num)=>{
+  num = num.toString()
+  return num.length
+}
 
 // Uncomment out the next line to test your solution
-// runQ2Tests()
+runQ2Tests()
 
 // Question Three:
 
 // Write a function called disemvowel that removes all of the vowels from a string.
 // Treat y as a consonant, not a vowel
+const disemvowel = (string) =>{
+    let newString = ''
+    let arr = []
+//Looping through the string and making it an array
+    for (let i = 0; i < string.length; i ++){
+      arr.push(string[i])
+  }
+
+//Looping through the array and making the value of vowels equal to 0
+  for(let i = 0;i < arr.length; i ++){
+    if(arr[i].toLowerCase() === `a`){
+      arr[i] = 0
+    }else if(arr[i].toLowerCase() === `e`){
+      arr[i] = 0
+    }else if(arr[i].toLowerCase() === `i`){
+      arr[i] = 0
+    }else if(arr[i].toLowerCase() === `o`){
+      arr[i] = 0
+    }else if(arr[i].toLowerCase() === `u`){
+      arr[i] = 0
+    }
+  }
+
+//Turning the modified array back into a string
+  for(let i = 0; i < arr.length; i ++ ){
+    if(arr[i] !== 0){
+      newString += arr[i]
+    }
+  }
+  return newString
+}
+
+
 
 // Uncomment out the next line to test your solution
-// runQ3Tests()
+runQ3Tests()
 
 // Question Four:
 // Write a function called secondSmallest that returns the second smallest number in an array
+const secondSmallest = (arr) =>{
+  let smallest = 10000000000 * 10000000000
+  let nextSmallest;
+  for(let i = 0; i < arr.length; i ++){
+    if(arr[i] < smallest){
+      nextSmallest = smallest
+      smallest = arr[i]
+    }else if(arr[i] < nextSmallest){
+      nextSmallest = arr[i]
+    }
+  }
+  return nextSmallest
+}
 
 // Uncomment out the next line to test your solution
-// runQ4Tests()
+runQ4Tests()
 
 // Question Five:
 // Write a function called getLocations that takes in an array of objects that look like the array below,
@@ -42,8 +103,20 @@ let assert = require('assert')
 // Sample output:
 // ["Algeria", "Belize", "China", "Denmark"]
 
+const getLocations = (arr) =>{
+  outputArr = []
+  for(let i = 0; i < arr.length; i ++){
+    for(key in arr[i]){
+      if (key === 'location'){
+        outputArr.push(arr[i][key])
+      }
+    }
+  }
+  return outputArr
+}
+
 // Uncomment out the next line to test your solution
-// runQ5Tests()
+runQ5Tests()
 
 
 // Question Six:
@@ -52,7 +125,16 @@ let assert = require('assert')
 // Your function should use a higher-ordered function (e.g map, filter, reduce, every, sort) in its implementation
 
 // Uncomment out the next line to test your solution
-// runQ6Tests()
+let testArr = [1,2,3,4,5,6]
+const testFilter = (elem, index, arr)=> elem % 2
+testArr = testArr.filter(testFilter);
+//console.log(testArr);
+
+const oddStringFilter = (elem, index, arr)=> elem.length % 2
+
+const onlyOddStrings = (arr) => arr.filter(oddStringFilter)
+
+runQ6Tests()
 
 
 // Question Seven:
@@ -63,7 +145,7 @@ let assert = require('assert')
 // Give it a method named getDescription that returns a string in the format described below
 
 // Example
-// let myDay = Day(80, "sunny")
+// let myDay = new Day(80, "sunny")
 // myDay.getDescription() // returns "It is 80 degrees and sunny"
 
 //b.
@@ -71,9 +153,30 @@ let assert = require('assert')
 // The output should be in the same order as the input
 
 // Uncomment out the next line to test your solution
-// runQ7Tests()
+
+class Day {
+  constructor(temperature, weather){
+    this.temperature = temperature
+    this.weather = weather
+  }
+  getDescription(){
+    return (`It is ${this.temperature} degrees and ${this.weather}`);
+  }
+}
+
+const getAllDayDescriptions = (arr) =>{
+  let outputArr = []
+  arr.forEach(elem =>{
+    if(typeof elem === typeof {}){
+      outputArr.push(elem.getDescription())
+    }
+  })
+  return outputArr
+}
 
 
+
+runQ7Tests()
 
 // The code below is used to test your solutions.  Feel free to look over it, but do not change any of it.
 
